@@ -68,40 +68,40 @@ async def distcon(ctx, distance, form):
 def fun(d, f):
 
     if f.lower() == "ftm":
-        rv = int(d) / 3.281
+        rv = (int(d) / 3.281)
 
     elif f.lower() == "mft":
-        rv = int(d) * 3.281
+        rv = (int(d) * 3.281)
 
     elif f.lower() == "mtcm":
-        rv = int(d) * 100
+        rv = (int(d) * 100)
 
     elif f.lower() == "cmmt":
-        rv = int(d) / 100
+        rv = (int(d) / 100)
 
     elif f.lower() == "incm":
-        rv = int(d) * 2.54
+        rv = (int(d) * 2.54)
 
     elif f.lower() == "cmin":
-        rv = int(d) / 2.54
+        rv = (int(d) / 2.54)
 
     elif f.lower() == "mk":
-        rv = int(d) * 1.609
+        rv = (int(d) * 1.609)
 
     elif f.lower() == "km":
-        rv = int(d) / 1.609
+        rv = (int(d) / 1.609)
 
     elif f.lower() == "yft":
-        rv = int(d) * 3
+        rv = (int(d) * 3)
 
     elif f.lower() == "fty":
-        rv = int(d) / 3
+        rv = (int(d) / 3)
 
     elif f.lower() == "inft":
-        rv = int(d) / 12
+        rv = (int(d) / 12)
 
     elif f.lower() == "ftin":
-        rv = int(d) * 12
+        rv = (int(d) * 12)
 
     else:
         rv = "sorry that measurement doesnt exist."
