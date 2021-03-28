@@ -61,47 +61,47 @@ async def div (ctx, a, b):
     await ctx.send(f"    {r} ")
 
 @client.command()
-async def distcon(ctx, distance, form):
- dv = str(func(distance, form))
+async def distcon(ctx, d, f):
+ dv = str(func(d, f))
  await ctx.send(dv)
 
 def fun(d, f):
 
     if f.lower() == "ftm":
-        dv = (int(d) / 3.281)
+        dv = int(d) / 3.281
 
     elif f.lower() == "mft":
-        dv = (int(d) * 3.281)
+        dv = int(d) * 3.281
 
     elif f.lower() == "mtcm":
-        dv = (int(d) * 100)
+        dv = int(d) * 100
 
     elif f.lower() == "cmmt":
-        dv = (int(d) / 100)
+        dv = int(d) / 100
 
     elif f.lower() == "incm":
-        dv = (int(d) * 2.54)
+        dv = int(d) * 2.54
 
     elif f.lower() == "cmin":
-        dv = (int(d) / 2.54)
+        dv = int(d) / 2.54
 
     elif f.lower() == "mk":
-        dv = (int(d) * 1.609)
+        dv = int(d) * 1.609
 
     elif f.lower() == "km":
-        dv = (int(d) / 1.609)
+        dv = int(d) / 1.609
 
     elif f.lower() == "yft":
-        dv = (int(d) * 3)
+        dv = int(d) * 3
 
     elif f.lower() == "fty":
-        dv = (int(d) / 3)
+        dv = int(d) / 3
 
     elif f.lower() == "inft":
-        dv = (int(d) / 12)
+        dv = int(d) / 12
 
     elif f.lower() == "ftin":
-        dv = (int(d) * 12)
+        dv = int(d) * 12
 
     else:
         dv = "sorry that measurement doesnt exist."
