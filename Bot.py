@@ -61,8 +61,8 @@ async def div (ctx, a, b):
     await ctx.send(f"    {r} ")
 
 @client.command()
-async def distcon(ctx, d, f):
- dv = str(func(d, f))
+async def distcon(ctx, distance, form):
+ dv = str(fun(distance, form))
  await ctx.send(dv)
 
 def fun(d, f):
