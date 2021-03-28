@@ -65,16 +65,16 @@ async def distcon(ctx, distance, form):
  rv = str(func(distance, form))
  await ctx.send(rv)
 
-def func(d, f):
+def fun(d, f):
 
     if f.lower() == "ftm":
-        rv = (int(d) / 3.281)
+        rv = int(d) / 3.281
 
     elif f.lower() == "mft":
-        rv = (int(d) * 3.281)
+        rv = int(d) * 3.281
 
     elif f.lower() == "mtcm":
-        rv = (int(d) * 100)
+        rv = int(d) * 100
 
     elif f.lower() == "cmmt":
         rv = int(d) / 100
