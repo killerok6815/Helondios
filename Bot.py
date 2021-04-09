@@ -1,3 +1,5 @@
+import datetime
+import pytz
 import discord
 from discord.ext import commands
 
@@ -107,5 +109,54 @@ def fun(d, f):
         dv = "sorry that measurement doesnt exist."
     return dv
 
+@client.command()
+async def add (ctx, a, b):
+    sum = (a + b)
+    await ctx.send(sum)
+
+@client.command()
+async def subt(ctx, a, b):
+    ans = (a - b)
+    await ctx.send(ans)
+
+@client.command()
+async def multiply(ctx, a, b):
+    ans2 = (a * b)
+    await ctx.send(ans2)
+
+@client.command()
+async def masscon(ctx, weight, form):
+ m = str(fun2(weight, form))
+ await ctx.send(m)
+
+def fun2(w, f):
+
+    if f.lower() == "lbkg":
+        m = int(w) / 2.20462262
+
+    elif f.lower() == "kglb":
+        m = int(w) * 2.20462262
+
+    elif f.lower() == "kgg":
+        m = int(w) * 1000
+
+    elif f.lower() == "gkg":
+        m = int(w) / 1000
+
+    elif f.lower() == "kgoz":
+        m = int(w) * 35.273962
+
+    elif f.lower() == "ozkg":
+        m = int(w) / 35.273962
+
+    else: m = "sorry that measurement doesnt exist."
+    return m
+
+@client.command()
+async def tzcon(ctx, tz):
+    if tz == "utc":
+        tz = datetime.time.now(tz=pytz.utc)
+
+    elif tz ==
 
 client.run('ODE4NTc1ODAxNTY1MTg0MDAw.YEaEHw.UgQunU01bLvm9Tl4ZoHsGYhtoNE')
