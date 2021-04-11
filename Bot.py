@@ -152,11 +152,4 @@ def fun2(w, f):
     else: m = "sorry that measurement doesnt exist."
     return m
 
-@client.command()
-async def tzcon(ctx, tz):
-    if tz == "utc":
-        tz = datetime.time.now(tz=pytz.utc)
-
-    elif tz ==
-
 client.run('ODE4NTc1ODAxNTY1MTg0MDAw.YEaEHw.UgQunU01bLvm9Tl4ZoHsGYhtoNE')
