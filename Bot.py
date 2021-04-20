@@ -3,36 +3,38 @@ import pytz
 import discord
 from discord.ext import commands
 
-client = commands.Bot(command_prefix = 'kilu ')
+#~~~~~~~~~~~~~~~~~INITIALIZATION~~~~~~~~~~~~~~~~~
+
+client = commands.Bot(command_prefix = ['kilu ', 'kilu', 'Kilu ', 'Kilu', 'k.')
+
+#~~~~~~~~~~~~~~~~~~~~~EVENTS~~~~~~~~~~~~~~~~~~~~~~~
 
 @client.event
 async def on_ready():
     print("online")
 
-@client.command()
-async def conv(ctx, temp, form):
- rv = str(func(temp, form))
- await ctx.send(rv)
+#~~~~~~~~~~~~~~~~~~~~COMMANDS~~~~~~~~~~~~~~~~~~~~~~~
 
-def func(t, f):
-    if t == 0 and f.lower() == "f":
-        rv = "-17.8"
+client.remove_command('help')
 
-    elif f.lower() == "f":
-        rv = (int(t)- 32) * 5 / 9
+#HELP
 
-    elif f.lower() == "c":
-     rv = (int(t)* 9 / 5) + 32
+@client.command(aliases = ["help", "cmd", "commands", "cmds])
+async def help(ctx):
 
-    elif f.lower() == "fk":
-     rv = (int(t)- 32) * 5 / 9 + 273.15
+    with open("cmd_help.txt") as f:
+        dat = f.readlines()
 
-    elif f.lower() == "ck":
-     rv = int(t)+ 273.15
+    cmd_str = ""
 
-    else:
-     rv = "sorry that measurement doesnt exist."
-    return rv
+    for i in dat:
+        cmd_str += i
+
+    embed=discord.Embed(title="Command Help", color=0x8f0921)
+    embed.add_field(name="General List", value=cmd_str, inline=False)
+    await ctx.send(embed=embed)
+
+#MISC
 
 @client.command()
 async def say(ctx, *, text):
@@ -40,116 +42,147 @@ async def say(ctx, *, text):
     await message.delete()
     await ctx.send(f"{text}")
 
-@client.command()
-async def cmds(ctx):
-    embed=discord.Embed(title="Command Help", color=0x8f0921)
-    embed.add_field(name="General list (wip)", value="cmds\n\nconv (*number*) (*measurement)* to convert from: c, f, ck, fk\n\nsay (msg here)", inline=False)
-    await ctx.send(embed=embed)
+#CONVERSIONS
+#----- Distance:
 
-@client.command()
-async def div (ctx, a, b):
-    a, b = int(a), int(b)
-    q = a / b
-    r = a % b
-    li = "-----"
+@client.command(aliases=["ftm", "fm", "f2m"])
+async def feet_to_metre(ctx, dist):
+    dv = int(dist) / 3.281
+    await ctx.send(dv)
 
-    for i in str(a):
-        li += "--"
+@client.command(aliases=["mft", "mtf", "mf", "m2f"])
+async def metre_to_feet(ctx, dist):
+    dv = int(dist) * 3.281
+    await ctx.send(dv)
 
-    await ctx.send(f"     {q}")
-    await ctx.send(li)
-    await ctx.send(f"{b} | {a} ")
-    await ctx.send(li)
-    await ctx.send(f"    {r} ")
+@client.command(aliases=["mtcm", "mcm", "m2c"])
+async def metre_to_centimetre(ctx, dist):
+    dv = int(dist) * 100
+    await ctx.send(dv)
 
-@client.command()
-async def distcon(ctx, distance, form):
- dv = str(fun(distance, form))
- await ctx.send(dv)
+@client.command(aliases=["ctm", "c2m", "cmm"])
+async def centimetre_to_metre(ctx, dist):
+    dv = int(dist) / 100
+    await ctx.send(dv)
 
-def fun(d, f):
+@client.command(aliases=["intcm", "incm", "i2c"])
+async def inch_to_centimetre(ctx, dist):
+    dv = int(dist) * 2.54
+    await ctx.send(dv)
 
-    if f.lower() == "ftm":
-        dv = int(d) / 3.281
+@client.command(aliases=["cmtin", "cmin", "c2i"])
+async def centimetre_to_inch(ctx, dist):
+    dv = int(dist) / 2.54
+    await ctx.send(dv)
 
-    elif f.lower() == "mft":
-        dv = int(d) * 3.281
+@client.command(aliases=["mtk", "mk", "m2k"])
+async def mile_to_kilometre(ctx, dist):
+    dv = int(dist) * 1.609
+    await ctx.send(dv)
 
-    elif f.lower() == "mtcm":
-        dv = int(d) * 100
+@client.command(aliases=["ktm", "km", "k2m"])
+async def kilometre_to_mile(ctx, dist):
+    dv = int(dist) / 1.609
+    await ctx.send(dv)
 
-    elif f.lower() == "cmmt":
-        dv = int(d) / 100
+@client.command(aliases=["ytft", "ytf", "yft", "y2f"])
+async def yard_to_feet(ctx, dist):
+    dv = int(dist) * 3
+    await ctx.send(dv)
 
-    elif f.lower() == "incm":
-        dv = int(d) * 2.54
+@client.command(aliases=["fty", "fy", "f2y"])
+async def feet_to_yard(ctx, dist):
+    dv = int(dist) / 3
+    await ctx.send(dv)
 
-    elif f.lower() == "cmin":
-        dv = int(d) / 2.54
+@client.command(aliases=["inft", "ift", "i2f"])
+async def inch_to_feet(ctx, dist):
+    dv = int(dist) / 12
+    await ctx.send(dv)
 
-    elif f.lower() == "mk":
-        dv = int(d) * 1.609
+@client.command(aliases=["ftin", "fti", "f2i"])
+async def feet_to_inch(ctx, dist):
+    dv = int(dist) * 12
+    await ctx.send(dv)
 
-    elif f.lower() == "km":
-        dv = int(d) / 1.609
+#----- Mass:
 
-    elif f.lower() == "yft":
-        dv = int(d) * 3
+@client.command(aliases=["lbkg", "l2k"])
+async def pound_to_kilos(ctx, weight):
+    m = int(weight) / 2.20462262
+    await ctx.send(m)
 
-    elif f.lower() == "fty":
-        dv = int(d) / 3
+@client.command(aliases=["kglb", "k2l"])
+async def kilos_to_pounds(ctx, weight):
+    m = int(weight) * 2.20462262
+    await ctx.send(m)
 
-    elif f.lower() == "inft":
-        dv = int(d) / 12
+@client.command(aliases=["gkg", "g2k"])
+async def grams_to_kilos(ctx, weight):
+    m = int(weight) / 1000
+    await ctx.send(m)
 
-    elif f.lower() == "ftin":
-        dv = int(d) * 12
 
-    else:
-        dv = "sorry that measurement doesnt exist."
-    return dv
+@client.command(aliases=["kgg", "k2g"])
+async def kilos_to_grams(ctx, weight):
+    m = int(weight) * 1000
+    await ctx.send(m)
 
-@client.command()
-async def add (ctx, a, b):
-    sum = (a + b)
+@client.command(aliases=["ozkg", "o2k"])
+async def ounces_to_kilos(ctx, weight):
+    m = int(weight) / 35.273962
+    await ctx.send(m)
+
+@client.command(aliases=["kgoz", "k2o"])
+async def kilos_to_ounces(ctx, weight):
+    m = int(weight) * 35.273962
+    await ctx.send(m)
+
+#----- Temperature:
+
+@client.command(aliases=["ftc", "fc", "f2c"])
+async def fahrenheit_to_celsius(ctx, temp=0):
+    rv = (int(t)- 32.0) * 5.0 / 9.0
+    await ctx.send(rv)
+
+@client.command(aliases=["ctf", "cf", "c2f"])
+async def celsius_to_fahrenheit(ctx, temp=0):
+    rv = (int(t)* 9.0 / 5.0) + 32.0
+    await ctx.send(rv)
+
+@client.command(aliases=["ftk", "fk", "f2k"])
+async def fahrenheit_to_kelvin(ctx, temp=0):
+    rv = (int(t)- 32.0) * 5.0 / 9.0 + 273.15
+    await ctx.send(rv)
+
+@client.command(aliases=["ctk", "ck", "c2k"])
+async def celsius_to_kelvin(ctx, temp=0):
+    rv = int(t) + 273.15
+    await ctx.send(rv)
+
+@client.command(aliases=["ktf", "kf", "k2f"])
+async def kelvin_to_fahrenheit(ctx, temp=0):
+    rv = ((int(t) -273.15)- 32.0) * 5.0 / 9.0
+    await ctx.send(rv)
+
+@client.command(aliases=["ktc", "kc", "k2c"])
+async def kelvin_to_celsius(ctx, temp=0):
+    rv = int(t) - 273.15
+    await ctx.send(rv)
+
+#MATH COMMANDS
+
+@client.command(aliases=["math", "calc", "op", "add", "subtract", "sub", "multiply", "mul", "divide", "div", "mod"])
+async def basic_calculation(ctx, *, expression):
+    expression = expression.split(' ')
+    expl = [x for x in expression]
+    while ' ' in expl:
+        expl.remove(' ')
+    a, o, b = expl[0], expl[1], expl[2]
+    str_ex = a + o + b
+    sum = eval(str_ex)
     await ctx.send(sum)
 
-@client.command()
-async def subt(ctx, a, b):
-    ans = (a - b)
-    await ctx.send(ans)
-
-@client.command()
-async def multiply(ctx, a, b):
-    ans2 = (a * b)
-    await ctx.send(ans2)
-
-@client.command()
-async def masscon(ctx, weight, form):
- m = str(fun2(weight, form))
- await ctx.send(m)
-
-def fun2(w, f):
-
-    if f.lower() == "lbkg":
-        m = int(w) / 2.20462262
-
-    elif f.lower() == "kglb":
-        m = int(w) * 2.20462262
-
-    elif f.lower() == "kgg":
-        m = int(w) * 1000
-
-    elif f.lower() == "gkg":
-        m = int(w) / 1000
-
-    elif f.lower() == "kgoz":
-        m = int(w) * 35.273962
-
-    elif f.lower() == "ozkg":
-        m = int(w) / 35.273962
-
-    else: m = "sorry that measurement doesnt exist."
-    return m
+#~~~~~~~~~~~~~~~~~~~~~~~RUN~~~~~~~~~~~~~~~~~~~~~~~~~
 
 client.run('ODE4NTc1ODAxNTY1MTg0MDAw.YEaEHw.UgQunU01bLvm9Tl4ZoHsGYhtoNE')
